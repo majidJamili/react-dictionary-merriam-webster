@@ -11,8 +11,7 @@ function WordForm({addWord}) {
     //     fetchWordData('important')
     // }, [word])
     const fetchWordData = async (wordToFind) =>{
-        const word = wordToFind
-        const url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${API_KEY}`;
+        const url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${wordToFind}?key=${API_KEY}`;
         try {
             const response = await fetch(url); 
             if (!response.ok) {

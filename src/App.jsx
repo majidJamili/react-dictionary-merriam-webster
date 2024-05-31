@@ -5,7 +5,8 @@ import './App.css'
 import TodoList from './TodoList'
 import '@fontsource/roboto/300.css';
 import TodoForm from './TodoForm'; 
-import WordFetcher from './WordFetcher'
+import WordFetcher from './WordFetcher'; 
+import WordList from './WordList'
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
       <>    
         {/* <TodoList/> */}
         <WordFetcher/>
+        {/* <WordList/> */}
+
       </>
   )
 }
