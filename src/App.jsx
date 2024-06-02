@@ -13,9 +13,8 @@ function App() {
   const [count, setCount] = useState(0); 
   return (
       <>    
-        {/* <TodoList/> */}
-        <WordFetcher/>
-        {/* <WordList/> */}
+
+        <WordList/>
 
       </>
   )

@@ -13,8 +13,26 @@ function WordItem({word, remove}){
         <div>
             <p>Word Title: </p>
                 {word.text}
-            <p>Word Definitions: </p>
-                {word.definitions}
+                {word.definitions.map((def, idx)=>(
+            
+                    <div>
+                        <p>usage: {def.usage}</p> 
+                        <p>date: {def.date}</p> 
+                        <p>function: {def.function}</p>
+                        <ul>short definitions
+                             {def.shortDefinitions.map((shortdef) => (
+                                <li key={shortdef}> {shortdef}</li>
+                                        )                            
+
+                             )}
+                        </ul>
+
+                    </div>
+                    
+                
+                
+                ))}
+                <button onClick={remove}>Remove Word</button>
         </div>
     )
 }
