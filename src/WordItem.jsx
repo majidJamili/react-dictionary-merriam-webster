@@ -14,23 +14,19 @@ import Avatar from '@mui/material/Avatar';
 import { deepOrange, green } from '@mui/material/colors';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+import {Box,ThemeProvider} from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import './wordItems.css'
 
 
-const bull = (
-    <Box
-      component="span"
-      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-    >
-      •
-    </Box>
-  );
+
+
 
 
 function WordItem({word, remove}){
@@ -42,10 +38,10 @@ function WordItem({word, remove}){
             return abbreviated; 
         }
     }
-    
-    return(
-        <Box>
-            <Card sx={{ }}>
+
+    return(        
+            <Box className="box">       
+                <Card>
                 <CardContent>
                     <Typography variant="h3" gutterBottom>
                         {word.text} 
@@ -55,54 +51,56 @@ function WordItem({word, remove}){
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <DeleteIcon onClick={remove} />                    
+                    <DeleteIcon onClick={remove} className='redIcons' />                    
                 </CardActions>
 
-            </Card>
-            {word.definitions.map((def, idx)=>(           
-                <Accordion>
-                    <AccordionSummary
-                    expandIcon={<ArrowDownwardIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                    >
-                    <Typography>
+                </Card>
+                {word.definitions.map((def, idx)=>(           
+                    <Accordion key={def.id}>
+                        <AccordionSummary
+                        expandIcon={<ArrowDownwardIcon />}
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                        >
+                        <Typography>
 
-                        <Stack         
-                            direction={{ xs: 'column', sm: 'row' }}
-                            spacing={{ xs: 1, sm: 2, md: 4 }}
-                        >                            
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                {def.usage}
-                            </Typography>
-                            <Chip label={def.function}  color="success" variant="outlined" /> 
-                        </Stack>  
-                    </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                    <Typography>
-                        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                            {def.shortDefinitions.map((shortdef) => (
-                                <ListItem key={shortdef}>
-                                <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: green[500] }} variant="rounded">
-                                        {abbreviator(def.function, true)}
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary={shortdef} secondary={def.date} />
-                                </ListItem>
-                                )                         
+                            <Stack         
+                                direction={{ xs: 'column', sm: 'row' }}
+                                spacing={{ xs: 1, sm: 2, md: 4 }}
+                            >                            
+                                <Typography className='mainText' sx={{fontSize:20}} gutterBottom>
+                                    {def.usage}
+                                </Typography>
+                                <Typography className='greenText' gutterBottom>
+                                    {def.function}
+                                </Typography>
+                            </Stack>  
+                        </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                        <Typography  key={def.id}>
+                            <List   sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                                {def.shortDefinitions.map((shortdef, idx) => (
+                                    <ListItem key={def.id + idx}>
+                                        <ListItemAvatar>
+                                            <Avatar sx={{ bgcolor: '#00498F' }} variant="rounded">
+                                                {abbreviator(def.function, true)}
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary={shortdef} secondary={def.date} />
+                                     
+                                    </ListItem>
+                                    )                         
 
-                            )}
-                        </List>
-                            
-                                        
-                    </Typography>
-                    </AccordionDetails>
-                </Accordion>                 
-            ))}
-
-        </Box>
+                                )}
+                            </List>
+                                
+                                            
+                        </Typography>
+                        </AccordionDetails>
+                    </Accordion>                 
+                ))}
+            </Box>
     )
 }
 

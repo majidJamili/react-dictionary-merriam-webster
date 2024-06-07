@@ -1,13 +1,13 @@
 import List from "@mui/material/List";
-
-import { Box, Typography } from "@mui/material";
 import WordItem from "./WordItem";
 import WordForm from "./WordForm";
-import WordForm_2 from "./WordForm_2";
-
-
 import { useState } from "react";
 import { useEffect } from "react";
+import { Box, Typography } from "@mui/material";
+import reactLogo from './assets/MerriamWebsterLogo.svg'
+
+
+
 
 
 
@@ -15,10 +15,8 @@ import { useEffect } from "react";
 const getInitialData = () => {
     const data = JSON.parse(localStorage.getItem('words')); 
     if (!data) {
-        console.log("Data None:", data)
         return []; 
     }else{
-        console.log("Data Exist:", data)
         return data;
     }
 }
@@ -63,10 +61,10 @@ function WordList(){
     const addWord = (text) => {
 
         fetchWordData(text).then(returnedDefinitions => {
-            console.log( "Is Array? ",Array.isArray(returnedDefinitions),'Value: ', returnedDefinitions)
             let values = []; 
             returnedDefinitions.map((def) => {
                 values.push({
+                    'id': crypto.randomUUID() ,
                     'usage':def.meta.id,
                     'date':def.date,
                     'function': def.fl,
@@ -74,9 +72,10 @@ function WordList(){
                     'shortDefinitions': def.shortdef
                 })
             })
+            console.log("new short short word:", returnedDefinitions)
 
-            console.log("Values", values)
             setWords(prevWords => {
+                console.log('prewords', prevWords)
                 return [...prevWords,{
                     text:text, id: crypto.randomUUID(), definitions:values, known:false
                 }]
@@ -86,32 +85,40 @@ function WordList(){
               
         })
         
-        // fetchedDefinition.map(def => console.log(`Data fetched one by one: ${def.meta.id}`))
-        
-        // setWords(prevWords => {
-        //     return [...prevWords,{
-        //         text:text, id: crypto.randomUUID(), definitions:'definitions', known:false
-        //     }]
-        // })
+
     };
 
-    return (
-        <div>
-            <WordForm addWord={addWord} />
-            <h1>Merriam-Webster Dictionary</h1>
-            {words.map((word)=>(
-                // <p>{word.text}</p>
-                <WordItem
-                    key={word.id}
-                    word={word}
-                    remove={() => removeWord(word.id)}
-                />
-                )
-            )}
-
-        </div>
+    return (  
+            <Box
+                sx={{
+                    display:"felx",
+                    justifyContent:"center",
+                    backgroundColor:"#D8DDE3", 
+                    flexDirection:"column",
+                    alignItems:"center", 
+                    m:"3"
+                }}
+            >
+                <a href="https://react.dev" target="_blank">
+                    <img src={reactLogo}  alt="React logo" />
+                </a>
+                <Typography variant="h1" gutterBottom>
+                    Learners' Dictionary                    
+                </Typography>
+                <Typography variant="caption" display="block" gutterBottom>
+                   Powered by Merriam-Webster Dictionary
+                </Typography>
+                <WordForm addWord={addWord} />
+                {words.map((word)=>(
+                    <WordItem
+                        key={word.id}
+                        word={word}
+                        remove={() => removeWord(word.id)}
+                    />
+                    )
+                )}
+            </Box>        
     )
-
 }
 
 export default WordList; 
