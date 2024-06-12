@@ -22,9 +22,10 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
-import './wordItems.css'
-
-
+import './wordItems.css';
+// import TextFieldInput from './TextFieldInput';
+import ExampleForm from './ExampleForm';
+import ExampleList from './ExampleList';
 
 
 
@@ -58,12 +59,11 @@ function WordItem({word, remove}){
                 {word.definitions.map((def, idx)=>(           
                     <Accordion key={def.id}>
                         <AccordionSummary
-                        expandIcon={<ArrowDownwardIcon />}
-                        aria-controls="panel1-content"
-                        id="panel1-header"
+                            expandIcon={<ArrowDownwardIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
                         >
                         <Typography>
-
                             <Stack         
                                 direction={{ xs: 'column', sm: 'row' }}
                                 spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -78,25 +78,33 @@ function WordItem({word, remove}){
                         </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                        <Typography  key={def.id}>
-                            <List   sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                                {def.shortDefinitions.map((shortdef, idx) => (
-                                    <ListItem key={def.id + idx}>
-                                        <ListItemAvatar>
-                                            <Avatar sx={{ bgcolor: '#00498F' }} variant="rounded">
-                                                {abbreviator(def.function, true)}
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                        <ListItemText primary={shortdef} secondary={def.date} />
-                                     
-                                    </ListItem>
-                                    )                         
+                            <Stack direction="row" spacing={1}>
+                                <Typography  key={def.id}>
+                                <Typography variant="subtitle1" gutterBottom style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
+                                    {word.text} DEFINITION  in {def.function} Format:
+                                </Typography>
+                                    <List   sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                                        {def.shortDefinitions.map((shortdef, idx) => (
+                                            <ListItem key={def.id + idx}>
+                                                <ListItemAvatar>
+                                                    <Avatar sx={{ bgcolor: '#00498F' }} variant="rounded">
+                                                        {abbreviator(def.function, true)}
+                                                    </Avatar>
+                                                </ListItemAvatar>
+                                                <ListItemText primary={shortdef} secondary="none" />                                     
+                                            </ListItem>
+                                            )                      
+                                        )}
+                                    </List>                                   
+                                </Typography>
+                                <Typography>
+                                    <ExampleList parentId={def.id}>
+                                    </ExampleList>
 
-                                )}
-                            </List>
-                                
-                                            
-                        </Typography>
+                                    {/* <ExampleForm>                                        
+                                    </ExampleForm> */}
+                                </Typography>
+                            </Stack>
                         </AccordionDetails>
                     </Accordion>                 
                 ))}
