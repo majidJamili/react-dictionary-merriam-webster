@@ -18,7 +18,7 @@ function ExampleItem({example, remove, parentId}){
 
     return(
         <ListItem alignItems="center">
-            <ListItemAvatar>
+       <ListItemAvatar>
             <Avatar sx={{ bgcolor: '#D71921' }}>
                 <AssignmentIcon />
             </Avatar>

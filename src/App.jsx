@@ -1,34 +1,54 @@
+import React from 'react';
 import { useState } from 'react'
-import reactLogo from './assets/MerriamWebsterLogo.svg'
-
 import './App.css'
-import TodoList from './TodoList'
 import '@fontsource/roboto/300.css';
-import TodoForm from './TodoForm'; 
-import WordFetcher from './WordFetcher'; 
 import WordList from './WordList'
-import websterLogo from './assets/MerriamWebsterLogo.svg';
-import WebsterIcon from './WebsterIcon';
 import Navbar from './Navbar';
-import { Box, Typography } from "@mui/material";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Box, ListItem, Switch } from "@mui/material";
+
+
+import LoginPage from './pages/LoginPage'; 
+import RegisterPage from './pages/RegisterPage';
+import Dashboard from './pages/Dashboard';
+
+
+
+
 
 
 function App() {
   const [count, setCount] = useState(0); 
   return (
-      <Box
-        sx={{
-          display:"felx",
-          justifyContent:"center",
-          backgroundColor:"lightblue", 
-          flexDirection:"column",
-          alignItems:"center", 
-          m:"3"
-      }}
-      >
+    <>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+
+        </Routes>
+      </Router>
+
+    {/* Please code as you go */}
+
+      {/* <Box
+          sx={{
+            display:"felx",
+            justifyContent:"center",
+            backgroundColor:"lightblue", 
+            flexDirection:"column",
+            alignItems:"center", 
+            m:"3"
+        }}
+        >
+                
+
+
         <Navbar/>
         <WordList/>
-      </Box>
+      </Box> */}
+    </>
   )
 }
 
