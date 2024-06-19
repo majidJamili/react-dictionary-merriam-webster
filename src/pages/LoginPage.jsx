@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { auth, provider, signInWithPopup } from './firebase';
+
+
 function LoginPage(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState(''); 
@@ -16,6 +18,24 @@ function LoginPage(){
             alert('Invalid Credentials')
         }  
     };
+
+    const handleGoogleLogin = async () =>{
+        try {
+            const result = await signInWithPopup(auth, provider); 
+            const user = result.user; 
+            const users = JSON.parse(localStorage.getItem('users')) || []; 
+            let notUser = !users.some(u => u.email === user.email)
+            if (notUser) {
+                users.push({email:user.email, password:null});
+                localStorage.setItem('users', JSON.stringify(users)); 
+            }
+            navigate('/dashboard')
+        } catch (error) {
+            console.error(error)
+            alert('Google Login Failed')
+        }
+
+    }
     const navigateToRegister = ()=>{
         navigate('/register');
     }
@@ -38,6 +58,8 @@ function LoginPage(){
                 </div>
                 <button type='submit'>Login</button>
                 <p onClick={navigateToRegister}>Don't have an account? Register here.</p>
+                <button onClick={handleGoogleLogin}>Login with Google</button>
+
    
             </form>
         </div>

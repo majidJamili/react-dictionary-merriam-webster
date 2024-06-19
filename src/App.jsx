@@ -12,12 +12,24 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
 
+import { auth, signOut } from './pages/firebase';
+
+
 
 
 
 
 
 function App() {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      alert('Logged out successfully');
+    } catch (error) {
+      console.error(error);
+      alert('Logout failed');
+    }
+  };
   const [count, setCount] = useState(0); 
   return (
     <>
