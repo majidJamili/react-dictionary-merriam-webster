@@ -7,36 +7,27 @@ function LoginPage(){
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        if (email === 'user@example' && password=== 'pass') {
-            navigateToHome();
-        }else{
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(user => user.email === email && user.password === password);
+        if (user) {
+            alert('Successful Login')
+            navigate('/dashboard')
+        } else {
             alert('Invalid Credentials')
-        }
+        }  
     };
     const navigateToRegister = ()=>{
         navigate('/register');
     }
-    const navigateToHome = () =>{
-        navigate('/dashboard');
-    }
 
 
-    const handleSubmit = async(e)=>{
-        try {
-            // const response = await axios.post('/api/logi',{email, password}); 
-            // localStorage.setItem('token', response.data.token); 
-            // navigate('/dashboard');
-            e.preventDefault();
-            handleLogin();
-            
-        } catch (error) {
-            console.log('Log-in Failed', error)
-        }
-    };
+
+
 
     return(
         <div>
-            <form onSubmit={handleSubmit}>
+            <h1>Login Page</h1>
+            <form onSubmit={handleLogin}>
                 <div>
                     <label >E-mail</label>
                     <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>                    

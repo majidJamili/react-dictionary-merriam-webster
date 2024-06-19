@@ -11,9 +11,27 @@ function RegisterPage(){
 
     const handleRegister = () =>{
         console.log('Registered: ', {email, password})
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userExists = users.some((user) => {
+            user.email === email
+        }); 
+        if (userExists) {
+            alert('User already exists!')
+        } else {
+            users.push({email, password})
+            localStorage.setItem('users', JSON.stringify(users)); 
+            console.log('new user have been added', users)
+            navigate('/dashboard')          
+        }
+        
+
+
     }
     const navigateToLogin = () =>{
         navigate('/login')
+    }
+    const navigateToDashboard = () =>{
+        navigate('/dashboard')
     }
 
     const handleSubmit = async (e) =>{
@@ -33,7 +51,7 @@ function RegisterPage(){
     return(
         <div>
             <h2>Register Page</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleRegister}>
                 <div>
                     <label> Email</label>
                     <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
