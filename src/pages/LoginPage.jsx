@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, provider, signInWithPopup } from './firebase';
+import { AppBar, Toolbar, Typography, Container, Button, Box, CssBaseline, Stack, TextField, InputLabel } from '@mui/material';
 
+import { auth, provider, signInWithPopup } from './firebase';
+import GoogleIcon from '@mui/icons-material/Google';
 
 function LoginPage(){
     const [email, setEmail] = useState('');
@@ -45,24 +47,45 @@ function LoginPage(){
 
 
     return(
-        <div>
-            <h1>Login Page</h1>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label >E-mail</label>
-                    <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>                    
-                </div>
-                <div>
-                    <label >Password</label>
-                    <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>                    
-                </div>
-                <button type='submit'>Login</button>
-                <p onClick={navigateToRegister}>Don't have an account? Register here.</p>
-                <button onClick={handleGoogleLogin}>Login with Google</button>
+
+            <form onSubmit={handleLogin} sx={{ display: 'flex', flexWrap: 'wrap', flexDirection:'col' }}>
+                <InputLabel htmlFor="EmailInput">
+                    Your Email Address
+                </InputLabel>
+                <TextField required type="email" id="EmailInput" label="Email" variant="outlined" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                <InputLabel htmlFor="PasswordInput">
+                    Password
+                </InputLabel>
+                <TextField required type="password" id="PasswordInput" label="Password" value={password} variant="outlined" onChange={(e)=> setPassword(e.target.value)}/>
+
+                <Button type="submit" variant="contained" color="success">Login</Button>
+                <Button variant="outlined" startIcon={<GoogleIcon />} onClick={handleGoogleLogin}>
+                    Login with Google
+                </Button>
+
+                <p onClick={navigateToRegister}> Don't have an account? Register here.</p>
 
    
             </form>
-        </div>
     )
 }
 export default LoginPage; 
+
+{/* <div>
+<h1>Login Page</h1>
+<form onSubmit={handleLogin}>
+    <div>
+        <label >E-mail</label>
+        <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>                    
+    </div>
+    <div>
+        <label >Password</label>
+        <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>                    
+    </div>
+    <button type='submit'>Login</button>
+    <p onClick={navigateToRegister}>Don't have an account? Register here.</p>
+    <button onClick={handleGoogleLogin}>Login with Google</button>
+
+
+</form>
+</div> */}

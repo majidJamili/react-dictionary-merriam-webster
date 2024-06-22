@@ -1,12 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth, signOut } from './firebase';
+
 
 function Dashboard() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Simulate logout (Clear user session and redirect to login)
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      alert('Logout failed');
+    }
   };
 
   return (
