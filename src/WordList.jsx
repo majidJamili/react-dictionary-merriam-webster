@@ -99,10 +99,8 @@ function WordList(){
                     m:"3"
                 }}
             >
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo}  alt="React logo" />
-                </a>
-                <Typography variant="h1" gutterBottom>
+                <img src={reactLogo}  alt="React logo"  className="imageDashboard"/>
+                <Typography variant="h4" gutterBottom>
                     Learners' Dictionary                    
                 </Typography>
                 <Typography variant="caption" display="block" gutterBottom>
@@ -118,7 +116,8 @@ function WordList(){
                     )
                 )}
             </Box>        
-    )
+    
+)
 }
 
 export default WordList; 

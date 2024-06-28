@@ -12,7 +12,12 @@ function AppModal({modalName,modalTitle, modalContent="<div></div>"}) {
 
   return (
     <div>
-      <TriggerButton onClick={handleOpen}>{modalName}</TriggerButton>
+      <TriggerButton onClick={handleOpen}         
+        sx={{background:'#D71921', color:'white', textTransform:'uppercase', fontWeight:'100'}}
+        
+      >
+        {modalName}
+      </TriggerButton>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -52,13 +57,15 @@ const Modal = styled(BaseModal)`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding:3rem;
+  margin:3rem;
+
 `;
 
 const StyledBackdrop = styled(Backdrop)`
   z-index: -1;
   position: fixed;
   inset: 0;
-  background-color: rgb(0 0 0 / 0.5);
   -webkit-tap-highlight-color: transparent;
 `;
 
@@ -125,13 +132,12 @@ const style = {
 
 const ModalContent = styled('div')(
   ({ theme }) => css`
-    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 500;
     text-align: start;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 15px;
     overflow: hidden;
     background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
     border-radius: 8px;
@@ -139,6 +145,7 @@ const ModalContent = styled('div')(
     box-shadow: 0 4px 12px
       ${theme.palette.mode === 'dark' ? 'rgb(0 0 0 / 0.5)' : 'rgb(0 0 0 / 0.2)'};
     padding: 24px;
+    margin:32px;
     color: ${theme.palette.mode === 'dark' ? grey[50] : grey[900]};
 
     & .modal-title {
