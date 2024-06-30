@@ -20,7 +20,7 @@ function App() {
   const {user} = useAuth()
   return (
     <Box>
-      <Box sx={{display:'flex', flexDirection:'row'}}>
+      {/* <Box sx={{display:'flex', flexDirection:'row'}}>
       <Avatar alt="Remy Sharp" src={user ? user.providerData[0].photoURL: ""} />
           {user ? 
                 <AvatarChipsApp label={user.displayName} source={user ? user.providerData[0]: ""} /> 
@@ -28,7 +28,7 @@ function App() {
                 <AvatarChipsApp label={"Please Login"} source={user ? user.providerData[0]: ""} />
           }
 
-      </Box>
+      </Box> */}
 
       <Router>
         <Routes>
