@@ -9,5 +9,8 @@ export default defineConfig({
     rollupOptions:{
       input:'public/index.html'
     }
+  },
+  server:{
+    historyApiFallback:true,
   }
 })
