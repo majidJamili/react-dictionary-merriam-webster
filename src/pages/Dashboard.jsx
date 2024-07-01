@@ -88,7 +88,6 @@ function Dashboard() {
               LEXICON LABORATORY
             </Typography>
             <Avatar alt="Remy Sharp" src={user ? user.providerData[0].photoURL: ""} />
-
             {user ? <AvatarChipsApp label={user.displayName} source={user ? user.providerData[0]: ""} />:<Typography>NO USER DATA AVA</Typography>}
             <Button color="inherit" variant='contaiened' onClick={handleLogout} endIcon={<LogoutIcon />}>
               Logout
